@@ -36,8 +36,8 @@ public class Timestamp {
         System.out.println("Give me a timestamp and you will know the time it represents.");
         String a = in.nextLine();
         long relativeTimestamp = Long.parseLong(a);
-        long absoluteTimestamp = relativeTimestamp + TIME_BEFORE_1970;
-        while (absoluteTimestamp >= 0) {
+        long absoluteTimestamp = relativeTimestamp + TIME_BEFORE_1970;  //转化成从公元元年1月1日0时0分0秒到输入时间点的总秒数，方便后续操作
+        while (absoluteTimestamp >= 0) {                                //弊端是计算机要多算许多步骤
             year++;
             if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
                 absoluteTimestamp -= LEAP_YEAR;
@@ -45,7 +45,7 @@ public class Timestamp {
                 absoluteTimestamp -= COMMON_YEAR;
             }
         }
-        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {  //判断是否是闰年
             absoluteTimestamp += LEAP_YEAR;
         } else {
             absoluteTimestamp += COMMON_YEAR;
@@ -92,7 +92,7 @@ public class Timestamp {
 
         absoluteTimestamp += A_MINUTE;
         second = absoluteTimestamp;
-        System.out.print("格林尼治标准时间");
+        System.out.print("Greenwich Mean Time");
         System.out.print(year + "/");
         System.out.print(month + "/");
         System.out.print(day + " ");
@@ -157,7 +157,7 @@ public class Timestamp {
             absoluteTimestamp += A_MINUTE;
         }
         absoluteTimestamp += second;
-        relativeTimestamp = absoluteTimestamp - TIME_BEFORE_1970;
+        relativeTimestamp = absoluteTimestamp - TIME_BEFORE_1970;//转换成相对于1970年1月1日0时0点的时间戳
         System.out.println(relativeTimestamp);
 
 
